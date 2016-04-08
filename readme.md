@@ -1,19 +1,35 @@
-ImportUsers is a MantisBT plugin that enables administrators to import users
-from a CSV file.
+# Import Users from CSV
 
-The support csv format is:
-
-The CSV format should include the following:
-- username (mandatory)
-- realname (optional)
-- email address (optional)
-- access level (viewer, reporter, ...etc) - use access levels enum config option for possible values.
-- password (empty generates random password)
-- protected (mandatory, accepts 1/0 or true/false)
-- enabled (mandatory, accepts 1/0 or true/false)
+A plugin that enables administrators to import a list of users into Mantis.
 
 Compatibility
 
-This plugin is compatible with MantisBT Modern UI.
-See http://github.com/mantishub/mantisbt
+- This plugin is compatible with MntisBT Modern UI v1.3.
+- See [https://github.com/mantishub/mantisbt](https://github.com/mantishub/mantisbt).
 
+# Installation Instructions
+
+- Download or clone the repository and place it under the MantisBT plugins folder.
+- Go to Manage - Manage Plugins and install the plugin.
+- Go to Manage - Import Users
+
+# Few hints about usability
+
+- Set send/not send the invite email by check/uncheck the invite email option in the init page.
+
+## Csv file demo
+
+![Csv Demo](wiki/csv_demo.png "Csv Demo")
+
+## Preview page
+
+![Init Page](wiki/init_page.png "Init Page")
+
+## Sample page
+
+![Col Set](wiki/col_set.png "Col Set")
+
+## Import status page
+
+![Status Page](wiki/status_page.png "Status Page")
+>>>>>>> 73d28d0... Plugin for import users via csv

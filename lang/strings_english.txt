@@ -1,0 +1,49 @@
+<?php
+
+# Custom strings for english language
+$s_plugin_ImportUsers_title = 'Import Users from CSV';
+$s_plugin_ImportUsers_description = 'Import CSV files as Mantis users';
+$s_plugin_ImportUsers_config = 'Configuration';
+$s_plugin_ImportUsers_update_config = 'Update configuration';
+$s_plugin_ImportUsers_file_format_col_spacer = 'CSV column separator';
+$s_plugin_ImportUsers_tab_csv_separator = 'Use tab';
+$s_plugin_ImportUsers_error_keys = 'The key "%s" exists on many bugs : %s';
+
+# Import users
+$s_plugin_ImportUsers_user_name = 'username';
+$s_plugin_ImportUsers_real_name = 'realname';
+$s_plugin_ImportUsers_email_address = 'email';
+$s_plugin_ImportUsers_access_level = 'accesslevel ';
+$s_plugin_ImportUsers_user_password = 'password';
+$s_plugin_ImportUsers_user_protected = 'protected';
+$s_plugin_ImportUsers_user_enabled = 'enabled';
+
+$s_plugin_ImportUsers_users_file = 'Import users from CSV file';
+$s_plugin_ImportUsers_user_name_description = 'Mandatory, not null, unique';
+$s_plugin_ImportUsers_real_name_description = 'Optional, unique';
+$s_plugin_ImportUsers_email_address_description = 'Optional, unique';
+$s_plugin_ImportUsers_access_level_description = 'Optional,access level (viewer, reporter, updater,developer,manager,administrator), reporter (defaulted)';
+$s_plugin_ImportUsers_user_password_description = 'Optional, empty auto-generates random password';
+$s_plugin_ImportUsers_user_protected_description = 'Mandatory, accepts 1/0 or true/false, true (defaulted)';
+$s_plugin_ImportUsers_user_enabled_description = 'Mandatory, accepts 1/0 or true/false, false (defaulted)';
+$s_plugin_ImportUsers_invite_emails_description = 'Send invite emails to added users when enabled and email address is supplied';
+
+$s_plugin_ImportUsers_manage_users_link = 'Import Users';
+$s_plugin_ImportUsers_manage_users = 'CSV importing';
+$s_plugin_ImportUsers_users_file = 'Import users from CSV file';
+$s_plugin_ImportUsers_file_button = 'Import file';
+$s_plugin_ImportUsers_error_file_not_writable = 'Cannot write file';
+$s_plugin_ImportUsers_error_file_not_opened = 'Cannot open file';
+$s_plugin_ImportUsers_max_file_size_label = 'Maximum size';
+
+$s_plugin_ImportUsers_username_vaild_error = 'username not valid';
+$s_plugin_ImportUsers_username_unique_error = 'username not unique';
+$s_plugin_ImportUsers_realname_unique_error = 'realname not unique';
+$s_plugin_ImportUsers_email_vaild_error = 'email not valid';
+$s_plugin_ImportUsers_email_unique_error = 'email not unique';
+$s_plugin_ImportUsers_import_success = 'success';
+
+# Errors
+$MANTIS_ERROR['plugin_Import_users_ERROR_FILE_FORMAT'] = 'Incorrect imported file format: %s';
+$MANTIS_ERROR['plugin_Import_users_ERROR_FILE'] = 'There was an error with the file itself';
+$MANTIS_ERROR['plugin_Import_users_ERROR_FILE_UPLOAD'] = 'Server can\'t store the uploaded file.';
