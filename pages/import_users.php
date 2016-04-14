@@ -51,22 +51,16 @@ foreach( $t_file_content as &$t_file_line ) {
 			$users_info[COLUMN_ACCESS_LEVEL] = REPORTER;
 		}
 
-		# default protected
-		if( is_blank($users_info[COLUMN_PROTECTED] ) ) {
-			$users_info[COLUMN_PROTECTED] = false;
-		} else {
-			if( strtolower( $users_info[COLUMN_PROTECTED] ) == 'false' ) {
-				$users_info[COLUMN_PROTECTED] = false;
-			}
+		# default protected and convert to boolean
+		$users_info[COLUMN_PROTECTED] = false;
+		if( strtolower( $users_info[COLUMN_PROTECTED] ) == 'true' ) {
+			$users_info[COLUMN_PROTECTED] = true;
 		}
-		
-		# default enabled
-		if( is_blank($users_info[COLUMN_ENABLED] ) ) {
-			$users_info[COLUMN_ENABLED] = true;
-		} else {
-			if( strtolower( $users_info[COLUMN_ENABLED] ) == 'false' ) {
-				$users_info[COLUMN_ENABLED] = false;
-			}
+
+		# default enabled and convert to boolean
+		$users_info[COLUMN_ENABLED] = true;
+		if( strtolower( $users_info[COLUMN_ENABLED] ) == 'false' ) {
+			$users_info[COLUMN_ENABLED] = false;
 		}
 
 		# error message
@@ -103,7 +97,8 @@ foreach( $t_file_content as &$t_file_line ) {
 			csv_user_create(
 				$users_info[COLUMN_USER_NAME], $users_info[COLUMN_PASSWORD], $users_info[COLUMN_EMAIL_ADDRESS],
 				$users_info[COLUMN_ACCESS_LEVEL], $users_info[COLUMN_PROTECTED], $users_info[COLUMN_ENABLED],
-				$users_info[COLUMN_REAL_NAME], $f_invite_emails );
+				$users_info[COLUMN_REAL_NAME], $f_invite_emails, user_get_name( auth_get_current_user_id() ) );
+
 			$status[] = plugin_lang_get( 'import_success' );
 		}
 	}
