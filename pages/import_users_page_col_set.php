@@ -2,7 +2,7 @@
 // Mantis - a php based bugtracking system
 require_once( 'core.php' );
 plugin_require_api( 'core/import_users_api.php' );
-access_ensure_project_level( plugin_config_get ( 'import_users_threshold' ) );
+access_ensure_global_level( ADMINISTRATOR );
 layout_page_header( plugin_lang_get( 'manage_users' ) );
 layout_page_begin();
 
