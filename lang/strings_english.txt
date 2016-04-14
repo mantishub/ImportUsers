@@ -10,14 +10,6 @@ $s_plugin_ImportUsers_tab_csv_separator = 'Use tab';
 $s_plugin_ImportUsers_error_keys = 'The key "%s" exists on many bugs : %s';
 
 # Import users
-$s_plugin_ImportUsers_user_name = 'username';
-$s_plugin_ImportUsers_real_name = 'realname';
-$s_plugin_ImportUsers_email_address = 'email';
-$s_plugin_ImportUsers_access_level = 'accesslevel ';
-$s_plugin_ImportUsers_user_password = 'password';
-$s_plugin_ImportUsers_user_protected = 'protected';
-$s_plugin_ImportUsers_user_enabled = 'enabled';
-
 $s_plugin_ImportUsers_users_file = 'Import users from CSV file';
 $s_plugin_ImportUsers_user_name_description = 'The username (required and must be unique)';
 $s_plugin_ImportUsers_real_name_description = 'The user real name (must be unique or empty)';

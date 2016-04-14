@@ -40,7 +40,7 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 	
 				<tr>
 					<td class="category" colspan="1" style="text-align:center">
-					<?php echo plugin_lang_get( 'user_name' ) ?>
+					<?php echo lang_get( 'username' ) ?>
 					</td>
 					<td>
 					<?php echo plugin_lang_get( 'user_name_description' ) ?>
@@ -49,7 +49,7 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 	
 				<tr>
 					<td class="category" colspan="1" style="text-align:center">
-					<?php echo plugin_lang_get( 'real_name' ) ?>
+					<?php echo lang_get( 'realname' ) ?>
 					</td>
 					<td>
 					<?php echo plugin_lang_get( 'real_name_description' ) ?>
@@ -58,7 +58,7 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 	
 				<tr>
 					<td class="category" colspan="1" style="text-align:center">
-					<?php echo plugin_lang_get( 'email_address' ) ?>
+					<?php echo lang_get( 'email' ) ?>
 					</td>
 					<td>
 					<?php echo plugin_lang_get( 'email_address_description' ) ?>
@@ -67,7 +67,7 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 	
 				<tr>
 					<td class="category" colspan="1" style="text-align:center">
-					<?php echo plugin_lang_get( 'access_level' ) ?>
+					<?php echo lang_get( 'access_level' ) ?>
 					</td>
 					<td>
 					<?php echo plugin_lang_get( 'access_level_description' ) ?>
@@ -76,7 +76,7 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 	
 				<tr>
 					<td class="category" colspan="1" style="text-align:center">
-					 <?php echo plugin_lang_get( 'user_password' ) ?>
+					 <?php echo lang_get( 'password' ) ?>
 					</td>
 					<td>
 					<?php echo plugin_lang_get( 'user_password_description' ) ?>
@@ -85,7 +85,7 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 	
 				<tr>
 					<td class="category" colspan="1" style="text-align:center">
-					<?php echo plugin_lang_get( 'user_protected' ) ?>
+					<?php echo lang_get( 'protected' ) ?>
 					</td>
 					<td>
 					<?php echo plugin_lang_get( 'user_protected_description' ) ?>
@@ -94,7 +94,7 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 	
 				<tr>
 					<td class="category" colspan="1" style="text-align:center">
-					<?php echo plugin_lang_get( 'user_enabled' ) ?>
+					<?php echo lang_get( 'enabled' ) ?>
 					</td>
 					<td>
 					<?php echo plugin_lang_get( 'user_enabled_description' ) ?>
