@@ -1,4 +1,9 @@
 <?php
+#
+# Copyright (c) 2016 MantisHub
+# Licensed under the MIT license
+#
+
 class ImportUsersPlugin extends MantisPlugin
 {
 	function register() {

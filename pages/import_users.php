@@ -1,4 +1,9 @@
 <?php
+#
+# Copyright (c) 2016 MantisHub
+# Licensed under the MIT license
+#
+
 require_once( 'core.php' );
 require_api( 'category_api.php' );
 require_api( 'database_api.php' );

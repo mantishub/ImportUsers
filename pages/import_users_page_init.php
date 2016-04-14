@@ -1,4 +1,9 @@
 <?php
+#
+# Copyright (c) 2016 MantisHub
+# Licensed under the MIT license
+#
+
 require_once( 'core.php' );
 
 plugin_require_api( 'core/import_users_api.php' );

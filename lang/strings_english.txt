@@ -1,4 +1,9 @@
 <?php
+#
+# Copyright (c) 2016 MantisHub
+# Licensed under the MIT license
+#
+
 # Custom strings for english language
 $s_plugin_ImportUsers_title = 'Import Users from CSV';
 $s_plugin_ImportUsers_description = 'Import CSV files as Mantis users';

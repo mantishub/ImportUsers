@@ -27,3 +27,8 @@ Compatibility
 ## Results Page
 
 ![Status Page](wiki/results_page.png "Results Page")
+
+## Credit
+
+Some of the code skeleton is re-used from Csv-Import plugin (for importing issues) by lionheart33806
+
