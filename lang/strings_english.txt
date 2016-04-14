@@ -44,6 +44,6 @@ $s_plugin_ImportUsers_email_unique_error = 'email not unique';
 $s_plugin_ImportUsers_import_success = 'success';
 
 # Errors
-$MANTIS_ERROR['plugin_Import_users_ERROR_FILE_FORMAT'] = 'Incorrect imported file format: %s';
-$MANTIS_ERROR['plugin_Import_users_ERROR_FILE'] = 'There was an error with the file itself';
-$MANTIS_ERROR['plugin_Import_users_ERROR_FILE_UPLOAD'] = 'Server can\'t store the uploaded file.';
+$MANTIS_ERROR['plugin_ImportUsers_ERROR_FILE_FORMAT'] = 'Incorrect imported file format: %s';
+$MANTIS_ERROR['plugin_ImportUsers_ERROR_FILE'] = 'There was an error with the file itself';
+$MANTIS_ERROR['plugin_ImportUsers_ERROR_FILE_UPLOAD'] = 'Server can\'t store the uploaded file.';
