@@ -1,0 +1,5 @@
+username, real name, e-mail, access level, password, protected, enabled
+billg, Bill Gates, billg@example.com, MANAGER, windows, false, true
+stevej, Steve Jobs, stevej@example.com, MANAGER, iphone, false, true
+linus, Linus Torvalds, linus@example.com, DEVELOPER, penguin, false, true
+jdoe, John Doe, jdoe@example.com, REPORTER, , false, true
