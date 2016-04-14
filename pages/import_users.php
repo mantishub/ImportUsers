@@ -93,11 +93,14 @@ foreach( $t_file_content as &$t_file_line ) {
 				}
 		}
 
+		if ( is_blank( $users_info[COLUMN_PASSWORD] ) ) {
+			$users_info[COLUMN_PASSWORD] = auth_generate_random_password();
+		}
+
 		if( !empty( $error_message ) ) {
 			$status [] = $error_message;
 			$error_message = array();
 		} else {
-			$users_info[COLUMN_PASSWORD] = auth_generate_random_password();
 			csv_user_create( $users_info[COLUMN_USER_NAME], $users_info[COLUMN_PASSWORD], $users_info[COLUMN_EMAIL_ADDRESS], $users_info[COLUMN_ACCESS_LEVEL], $users_info[COLUMN_PROTECTED], $users_info[COLUMN_ENABLED], $users_info[COLUMN_REAL_NAME], $f_invite_emails );
 			$status[] = plugin_lang_get( 'import_success' );
 		}
