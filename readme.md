@@ -4,8 +4,7 @@ A plugin that enables administrators to import a list of users into Mantis.
 
 Compatibility
 
-- This plugin is compatible with MntisBT Modern UI v1.3.
-- See [https://github.com/mantishub/mantisbt](https://github.com/mantishub/mantisbt).
+- This plugin is compatible with [MantisBT Modern UI v1.3](https://github.com/mantishub/mantisbt).
 
 # Installation Instructions
 
@@ -13,23 +12,18 @@ Compatibility
 - Go to Manage - Manage Plugins and install the plugin.
 - Go to Manage - Import Users
 
-# Few hints about usability
+## Sample CSV File
 
-- Set send/not send the invite email by check/uncheck the invite email option in the init page.
+![Csv Demo](wiki/sample_csv.png "Sample CSV File")
 
-## Csv file demo
+## Import Form
 
-![Csv Demo](wiki/csv_demo.png "Csv Demo")
+![Init Page](wiki/import_form.png "Import Form")
 
-## Preview page
+## Preview Page
 
-![Init Page](wiki/init_page.png "Init Page")
+![Col Set](wiki/preview_page.png "Preview Page")
 
-## Sample page
+## Results Page
 
-![Col Set](wiki/col_set.png "Col Set")
-
-## Import status page
-
-![Status Page](wiki/status_page.png "Status Page")
->>>>>>> 73d28d0... Plugin for import users via csv
+![Status Page](wiki/results_page.png "Results Page")
