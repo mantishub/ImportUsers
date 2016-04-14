@@ -19,13 +19,13 @@ $s_plugin_ImportUsers_user_protected = 'protected';
 $s_plugin_ImportUsers_user_enabled = 'enabled';
 
 $s_plugin_ImportUsers_users_file = 'Import users from CSV file';
-$s_plugin_ImportUsers_user_name_description = 'Mandatory, not null, unique';
-$s_plugin_ImportUsers_real_name_description = 'Optional, unique';
-$s_plugin_ImportUsers_email_address_description = 'Optional, unique';
-$s_plugin_ImportUsers_access_level_description = 'Optional,access level (viewer, reporter, updater,developer,manager,administrator), reporter (defaulted)';
-$s_plugin_ImportUsers_user_password_description = 'Optional, empty auto-generates random password';
-$s_plugin_ImportUsers_user_protected_description = 'Mandatory, accepts 1/0 or true/false, true (defaulted)';
-$s_plugin_ImportUsers_user_enabled_description = 'Mandatory, accepts 1/0 or true/false, false (defaulted)';
+$s_plugin_ImportUsers_user_name_description = 'The username (required and must be unique)';
+$s_plugin_ImportUsers_real_name_description = 'The user real name (must be unique or empty)';
+$s_plugin_ImportUsers_email_address_description = 'The user\'s email address (must be unique or empty)';
+$s_plugin_ImportUsers_access_level_description = 'The user\'s access level (e.g. REPORTER, DEVELOPER). Default is REPORTER';
+$s_plugin_ImportUsers_user_password_description = 'The user\'s password (if empty, it will be auto-generated)';
+$s_plugin_ImportUsers_user_protected_description = 'The user account is protected (e.g. shared account for anonymous access).  Default is FALSE';
+$s_plugin_ImportUsers_user_enabled_description = 'The user account is enabled.  Default is TRUE';
 $s_plugin_ImportUsers_invite_emails_description = 'Send invite emails to added users when enabled and email address is supplied';
 
 $s_plugin_ImportUsers_manage_users_link = 'Import Users';
