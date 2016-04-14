@@ -40,6 +40,55 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 	
 				<tr>
 					<td class="category" colspan="1" style="text-align:center">
+					<input type="checkbox" class="ace" checked="checked" name="invite_emails" />
+			        <span class="lbl"> </span>
+					</td>
+					<td>
+					<?php echo plugin_lang_get( 'invite_emails_description' );?> 
+					</td>
+				</tr>
+	
+				<tr>
+					<td class="category" width="15%" style="text-align:center">
+					<?php echo lang_get( 'select_file' ) ?><br />
+					<?php echo '<span class="small">(' . plugin_lang_get( 'max_file_size_label' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)</span>'?>
+					</td>
+					<td width="85%" colspan="2">
+					<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
+					<input type="file" name="import_file" size="40" />
+					</td>
+				</tr>
+			</table>
+					</div>
+				</div>
+	
+				<div class="widget-toolbox padding-8 clearfix">
+					<input type="submit" class="btn btn-primary btn-white btn-sm btn-round" value="<?php echo lang_get( 'upload_file_button' ) ?>" />
+				</div>
+			</div>
+		</div>
+
+		</form>
+	</div>
+</div>
+
+<div class="col-md-12 col-xs-12">
+	<div class="space-10"></div>
+	<div class="form-container">
+		<div class="widget-box widget-color-blue2">
+			<div class="widget-header widget-header-small">
+				<h4 class="widget-title lighter">
+					<?php echo plugin_lang_get( 'users_file_format' ) ?>
+				</h4>
+			</div>
+
+			<div class="widget-body">
+				<div class="widget-main no-padding">
+					<div class="table-responsive">
+
+			<table class="table table-striped table-bordered table-condensed table-hover">
+				<tr>
+					<td class="category" colspan="1" style="text-align:center">
 					<?php echo lang_get( 'username' ) ?>
 					</td>
 					<td>
@@ -100,38 +149,11 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 					<?php echo plugin_lang_get( 'user_enabled_description' ) ?>
 					</td>
 				</tr>
-	
-				<tr>
-					<td class="category" colspan="1" style="text-align:center">
-					<input type="checkbox" class="ace" checked="checked" name="invite_emails" />
-			        <span class="lbl"> </span>
-					</td>
-					<td>
-					<?php echo plugin_lang_get( 'invite_emails_description' );?> 
-					</td>
-				</tr>
-	
-				<tr>
-					<td class="category" width="15%" style="text-align:center">
-					<?php echo lang_get( 'select_file' ) ?><br />
-					<?php echo '<span class="small">(' . plugin_lang_get( 'max_file_size_label' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)</span>'?>
-					</td>
-					<td width="85%" colspan="2">
-					<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
-					<input type="file" name="import_file" size="40" />
-					</td>
-				</tr>
-			</table>
+				</table>
 					</div>
-				</div>
-	
-				<div class="widget-toolbox padding-8 clearfix">
-					<input type="submit" class="btn btn-primary btn-white btn-sm btn-round" value="<?php echo lang_get( 'upload_file_button' ) ?>" />
 				</div>
 			</div>
 		</div>
-
-		</form>
 	</div>
 </div>
 

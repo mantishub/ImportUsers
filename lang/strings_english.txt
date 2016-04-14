@@ -23,6 +23,7 @@ $s_plugin_ImportUsers_invite_emails_description = 'Send invite emails to added u
 $s_plugin_ImportUsers_manage_users_link = 'Import Users';
 $s_plugin_ImportUsers_manage_users = 'CSV importing';
 $s_plugin_ImportUsers_users_file = 'Import users from CSV file';
+$s_plugin_ImportUsers_users_file_format = 'Users File Format (expected columns in specified order)';
 $s_plugin_ImportUsers_file_button = 'Import file';
 $s_plugin_ImportUsers_error_file_not_writable = 'Cannot write file';
 $s_plugin_ImportUsers_error_file_not_opened = 'Cannot open file';
