@@ -19,7 +19,7 @@ class ImportUsersPlugin extends MantisPlugin
 
 	function csv_import_menu() {
 		return array(
-			'<a href="' . plugin_page( 'import_users_page_init' ) . '">' . plugin_lang_get( 'manage_users_link' ) . '</a>',
+			'<a href="' . plugin_page( 'import_users_page_init' ) . '">' . plugin_lang_get( 'import_users' ) . '</a>',
 		);
 	}
 }

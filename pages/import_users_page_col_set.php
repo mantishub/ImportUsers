@@ -1,16 +1,15 @@
  <?php
-// Mantis - a php based bugtracking system
 require_once( 'core.php' );
 plugin_require_api( 'core/import_users_api.php' );
+
 access_ensure_global_level( ADMINISTRATOR );
-layout_page_header( plugin_lang_get( 'manage_users' ) );
+
+layout_page_header( plugin_lang_get( 'import_users' ) );
 layout_page_begin();
 
-$import_it = plugin_page( 'import_users' );
-$t_invite_emails = gpc_get_bool( 'invite_emails' );
-?>
+$t_import_it = plugin_page( 'import_users' );
+$f_invite_emails = gpc_get_bool( 'invite_emails' );
 
-<?php
 // Look if the import file name is in the posted data
 $f_import_file = gpc_get_file( 'import_file', - 1 );
 
@@ -23,11 +22,10 @@ if ( is_blank ( $f_import_file ['tmp_name'] ) || ( $f_import_file ['size'] == 0 
 $t_file_content = read_csv_file( $f_import_file ['tmp_name'] );
 $t_separator = gpc_get_string( 'edt_cell_separator' );
 
-$t_column_count = - 1;
+$t_column_count = -1;
 $t_column_title = array();
 
 foreach( $t_file_content as $t_key => &$t_file_line ) {
-
 	$t_elements = read_csv_row( $t_file_line, $t_separator );
 
 	// First line
@@ -119,35 +117,37 @@ foreach ( $t_file_content as &$t_file_line ) {
 	} else {
 		// Write values
 		foreach ( read_csv_row ( $t_file_line, $t_separator ) as $t_key => $t_element ) {
-
-			if( $t_key == 4 ) {
+			if( $t_key == COLUMN_PASSWORD ) {
 				if( is_blank( $t_element ) ) {
-					echo '<td><font color="green">'.prepare_output( 'auto-generate' ).'</font></td>';
+					echo '<td><font color="green">' . plugin_lang_get( 'auto_generate' ) . '</font></td>';
 				} else {
-				    echo '<td>' . prepare_output ($t_element) . '</td>';
+				    echo '<td>' . prepare_output( $t_element ) . '</td>';
 			    }
+
 				continue;
 			}
 
-			if( $t_key == 5 ) {
+			if( $t_key == COLUMN_PROTECTED ) {
 				if( is_blank( $t_element ) ) {
-					echo '<td><font color="green">'.prepare_output( 'false' ).'</font></td>';
+					echo '<td><font color="green">false</font></td>';
 				} else {
-					echo '<td>' . prepare_output ($t_element) . '</td>';
+					echo '<td>' . prepare_output( $t_element ) . '</td>';
 				}
+
 				continue;
 			}
 
-			if( $t_key == 6 ) {
+			if( $t_key == COLUMN_ENABLED ) {
 				if( is_blank( $t_element ) ) {
-					echo '<td><font color="green">'.prepare_output( 'true' ).'</font></td>';
+					echo '<td><font color="green">true</font></td>';
 				} else {
-					echo '<td>' . prepare_output ($t_element) . '</td>';
+					echo '<td>' . prepare_output( $t_element ) . '</td>';
 				}
+
 				continue;
 			}
 
-			echo '<td>' . prepare_output ($t_element) . '</td>';
+			echo '<td>' . prepare_output( $t_element ) . '</td>';
 		}		
 	}
 	echo '</tr>';
@@ -159,11 +159,11 @@ foreach ( $t_file_content as &$t_file_line ) {
 			</div>
 
 			<div class="widget-toolbox padding-8 clearfix">
-			<form method="post" action="<?php echo $import_it ?>">
+			<form method="post" action="<?php echo $t_import_it ?>">
 				<input type="hidden" name="edt_cell_separator" value="<?php echo $t_separator ?>" /> 
 				<input type="hidden" name="import_file" value="<?php echo $t_file_name ?>" /> 
 				<input type="hidden" name="import_column_count" value="<?php echo $t_column_count ?>" /> 
-				<input type="hidden" name="t_invite_emails" value="<?php echo $t_invite_emails ?>" /> 
+				<input type="hidden" name="invite_emails" value="<?php echo $f_invite_emails ?>" /> 
 				<input type="submit" id="importForm" class="btn btn-primary btn-white btn-sm btn-round" value="<?php echo plugin_lang_get( 'file_button' ) ?>" />
 			</form>
 			</div>

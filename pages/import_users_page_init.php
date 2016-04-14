@@ -1,20 +1,21 @@
 <?php
-# Mantis - a php based bugtracking system
 require_once( 'core.php' );
+
 plugin_require_api( 'core/import_users_api.php' );
+
 access_ensure_global_level( ADMINISTRATOR );
 
-layout_page_header( plugin_lang_get( 'manage_users' ) );
+layout_page_header( plugin_lang_get( 'import_users' ) );
 layout_page_begin();
 
-$import_page = plugin_page('import_users_page_col_set');
+$t_import_page = plugin_page('import_users_page_col_set');
 
 $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 ?>
 <div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
 	<div class="form-container">
-		<form method="post" enctype="multipart/form-data" action="<?php echo $import_page ?>">
+		<form method="post" enctype="multipart/form-data" action="<?php echo $t_import_page ?>">
 
 		<div class="widget-box widget-color-blue2">
 			<div class="widget-header widget-header-small">
@@ -51,7 +52,7 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 				<tr>
 					<td class="category" width="15%" style="text-align:center">
 					<?php echo lang_get( 'select_file' ) ?><br />
-					<?php echo '<span class="small">(' . plugin_lang_get( 'max_file_size_label' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)</span>'?>
+					<?php echo '<span class="small">(' . lang_get( 'max_file_size_label' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)</span>'?>
 					</td>
 					<td width="85%" colspan="2">
 					<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />

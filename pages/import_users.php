@@ -1,24 +1,23 @@
 <?php
-// Mantis - a php based bugtracking system
 require_once( 'core.php' );
 require_api( 'category_api.php' );
 require_api( 'database_api.php' );
 require_api( 'user_api.php' );
 require_api( 'bug_api.php' );
+
 plugin_require_api( 'core/import_users_api.php' );
 access_ensure_project_level( config_get ( 'manage_site_threshold' ) );
-layout_page_header( plugin_lang_get( 'manage_users' ) );
-layout_page_begin();
-?>
 
-<?php
+layout_page_header( plugin_lang_get( 'import_users' ) );
+layout_page_begin();
+
 $f_import_file = gpc_get_string( 'import_file' );
 $f_separator = gpc_get_string( 'edt_cell_separator' );
 $f_column_count = gpc_get_string( 'import_column_count' ) + 1;
-$f_invite_emails = gpc_get_bool( 't_invite_emails' );
+$f_invite_emails = gpc_get_bool( 'invite_emails' );
 $t_file_content = read_csv_file( $f_import_file );
 
-$columns_lables = array();
+$t_columns_lables = array();
 $users_info = array();
 
 # Display first file lines
@@ -36,7 +35,7 @@ foreach( $t_file_content as &$t_file_line ) {
 		$t_first_run = false;
 
 		foreach( read_csv_row ( $t_file_line, $f_separator ) as $t_element ) {
-			$columns_lables[] = trim( $t_element );
+			$t_columns_lables[] = trim( $t_element );
 		}
 
 		continue;
@@ -101,7 +100,10 @@ foreach( $t_file_content as &$t_file_line ) {
 			$status [] = $error_message;
 			$error_message = array();
 		} else {
-			csv_user_create( $users_info[COLUMN_USER_NAME], $users_info[COLUMN_PASSWORD], $users_info[COLUMN_EMAIL_ADDRESS], $users_info[COLUMN_ACCESS_LEVEL], $users_info[COLUMN_PROTECTED], $users_info[COLUMN_ENABLED], $users_info[COLUMN_REAL_NAME], $f_invite_emails );
+			csv_user_create(
+				$users_info[COLUMN_USER_NAME], $users_info[COLUMN_PASSWORD], $users_info[COLUMN_EMAIL_ADDRESS],
+				$users_info[COLUMN_ACCESS_LEVEL], $users_info[COLUMN_PROTECTED], $users_info[COLUMN_ENABLED],
+				$users_info[COLUMN_REAL_NAME], $f_invite_emails );
 			$status[] = plugin_lang_get( 'import_success' );
 		}
 	}
@@ -128,10 +130,10 @@ foreach( $t_file_content as &$t_file_line ) {
 	<tr class="row-category">
 	<?php
 	// Write columns labels
-	foreach( $columns_lables as $columns ) {
+	foreach( $t_columns_lables as $columns ) {
 		echo '<td>' . prepare_output( $columns ) . '</td>';
 	}
-	echo '<td>Status</td>';
+	echo '<td>', plugin_lang_get( 'import_status' ), '</td>';
 	?>
 	</tr>
 
@@ -162,7 +164,7 @@ foreach( $t_file_content as &$t_file_line ) {
 
 			if( $t_key == COLUMN_PASSWORD ) {
 				if( is_blank( $t_element ) ) {
-					echo '<td><font color="green">' . prepare_output( 'auto-generate' ) . '</font></td>';
+					echo '<td><font color="green">' . plugin_lang_get( 'auto_generate' ) . '</font></td>';
 				} else {
 					echo '<td>' . prepare_output( $t_element ) . '</td>';
 				}
@@ -171,7 +173,7 @@ foreach( $t_file_content as &$t_file_line ) {
 
 			if( $t_key == COLUMN_PROTECTED ) {
 				if( is_blank( $t_element ) ) {
-					echo '<td><font color="green">' . prepare_output( 'false' ) . '</font></td>';
+					echo '<td><font color="green">false</font></td>';
 				} else {
 					echo '<td>' . prepare_output( $t_element ) . '</td>';
 				}
@@ -180,14 +182,14 @@ foreach( $t_file_content as &$t_file_line ) {
 
 			if( $t_key == COLUMN_ENABLED ) {
 				if( is_blank( $t_element ) ) {
-					echo '<td><font color="green">'.prepare_output( 'true' ).'</font></td>';
+					echo '<td><font color="green">true</font></td>';
 				} else {
-					echo '<td>' . prepare_output ( $t_element ) . '</td>';
+					echo '<td>' . prepare_output( $t_element ) . '</td>';
 				}
 				continue;
 			}
 
-			echo '<td>' . prepare_output ( $t_element ) . '</td>';
+			echo '<td>' . prepare_output( $t_element ) . '</td>';
 		}
 	}
 
