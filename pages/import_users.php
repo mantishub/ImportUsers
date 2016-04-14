@@ -36,14 +36,14 @@ foreach( $t_file_content as &$t_file_line ) {
 		$t_first_run = false;
 
 		foreach( read_csv_row ( $t_file_line, $f_separator ) as $t_element ) {
-			$columns_lables [] = $t_element;
+			$columns_lables[] = trim( $t_element );
 		}
 
 		continue;
 	} else {
 		$users_info = array ();
 		foreach( read_csv_row ( $t_file_line, $f_separator ) as $t_element ) {
-			$users_info [] = $t_element;
+			$users_info[] = trim( $t_element );
 		}
 
 		# default access_level
