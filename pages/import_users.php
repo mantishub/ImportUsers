@@ -207,6 +207,13 @@ foreach( $t_file_content as &$t_file_line ) {
       		</div>
 	  	</div>
 	</div> 
+	<br />
+	<a class="btn btn-primary btn-sm btn-white btn-round" href="manage_user_page.php">
+		<?php echo lang_get( 'manage_users_link' ) ?>
+	</a>
+	<a class="btn btn-primary btn-sm btn-white btn-round" href="<?php echo plugin_page( 'import_users_page_init' ) ?>">
+		<?php echo plugin_lang_get( 'import_more_link' ) ?>
+	</a>
 	</div>
 </div>
 <?php

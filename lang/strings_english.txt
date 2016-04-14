@@ -34,6 +34,7 @@ $s_plugin_ImportUsers_import_success = 'success';
 
 $s_plugin_ImportUsers_auto_generate = 'auto-generate';
 $s_plugin_ImportUsers_import_status = 'Status';
+$s_plugin_ImportUsers_import_more_link = 'Import More Users';
 
 # Errors
 $MANTIS_ERROR['plugin_ImportUsers_ERROR_FILE_FORMAT'] = 'Incorrect imported file format: %s';
