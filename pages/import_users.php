@@ -51,6 +51,7 @@ foreach( $t_file_content as &$t_file_line ) {
 		}
 
 		# default access_level
+		$users_info[COLUMN_ACCESS_LEVEL] = strtolower( $users_info[COLUMN_ACCESS_LEVEL] );
 		$users_info[COLUMN_ACCESS_LEVEL] = MantisEnum::getValue( config_get( 'access_levels_enum_string' ), $users_info[COLUMN_ACCESS_LEVEL] );
 		if( is_blank( $users_info[COLUMN_ACCESS_LEVEL] ) ) {
 			$users_info[COLUMN_ACCESS_LEVEL] = REPORTER;
