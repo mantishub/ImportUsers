@@ -11,7 +11,7 @@ require_api( 'user_api.php' );
 require_api( 'bug_api.php' );
 
 plugin_require_api( 'core/import_users_api.php' );
-access_ensure_project_level( config_get ( 'manage_site_threshold' ) );
+access_ensure_project_level( ADMINISTRATOR );
 
 layout_page_header( plugin_lang_get( 'import_users' ) );
 layout_page_begin();
