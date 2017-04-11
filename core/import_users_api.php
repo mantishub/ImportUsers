@@ -79,6 +79,7 @@ function csv_user_create(
 	if( $c_enabled ) {
 		if( $p_invite_emails ) {
 			$t_confirm_hash = auth_generate_confirm_hash( $t_user_id );
+			token_set( TOKEN_ACCOUNT_ACTIVATION, $t_confirm_hash, TOKEN_EXPIRY_ACCOUNT_ACTIVATION, $t_user_id );
 			email_signup( $t_user_id, $t_confirm_hash, $p_admin_name );
 		}
 	}
