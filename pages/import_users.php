@@ -78,10 +78,6 @@ foreach( $t_file_content as &$t_file_line ) {
 			$error_message[] = plugin_lang_get( 'username_unique_error' );
 		}
 
-		if( 1 > user_is_realname_unique( $users_info[COLUMN_USER_NAME], $users_info[COLUMN_REAL_NAME] ) ) {
-			$error_message[] = plugin_lang_get( 'realname_unique_error' );
-		}
-
 		if( !is_blank( $users_info[COLUMN_EMAIL_ADDRESS] ) ) {
 				if( !email_is_valid( $users_info[COLUMN_EMAIL_ADDRESS] ) ) {
 					$error_message[] = plugin_lang_get( 'email_vaild_error' );
