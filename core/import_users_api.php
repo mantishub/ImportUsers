@@ -41,8 +41,26 @@ function read_csv_row( $p_file_row, $p_separator ) {
 }
 
 # --------------------
-function prepare_output( $t_string ) {
-	return string_html_specialchars( utf8_encode( $t_string ) );
+function prepare_output( $p_string ) {
+	return string_html_specialchars( utf8_encode( $p_string ) );
+}
+
+# --------------------
+function prepare_bool_output( $p_string, $p_default ) {
+	$t_value = prepare_output( $p_string );
+	$t_value = strtolower( $t_value );
+
+	if( is_blank( $t_value ) ) {
+		$t_value = $p_default ? 'true' : 'false';
+	}
+
+	if( $t_value == 'on' || $t_value == '1' || $t_value == 't' || $t_value == 'true' || $t_value = 'yes' || $t_value == 'y' ) {
+		$t_value = 'true';
+	} else {
+		$t_value = 'false';
+	}
+
+	return $t_value;
 }
 
 # --------------------

@@ -58,16 +58,12 @@ foreach( $t_file_content as &$t_file_line ) {
 		}
 
 		# default protected and convert to boolean
-		$users_info[COLUMN_PROTECTED] = false;
-		if( strtolower( $users_info[COLUMN_PROTECTED] ) == 'true' ) {
-			$users_info[COLUMN_PROTECTED] = true;
-		}
+		$users_info[COLUMN_PROTECTED] = prepare_bool_output( $users_info[COLUMN_PROTECTED], false );
+		$users_info[COLUMN_PROTECTED] = $users_info[COLUMN_PROTECTED] == 'true';
 
 		# default enabled and convert to boolean
-		$users_info[COLUMN_ENABLED] = true;
-		if( strtolower( $users_info[COLUMN_ENABLED] ) == 'false' ) {
-			$users_info[COLUMN_ENABLED] = false;
-		}
+		$users_info[COLUMN_ENABLED] = prepare_bool_output( $users_info[COLUMN_ENABLED], true );
+		$users_info[COLUMN_ENABLED] = $users_info[COLUMN_ENABLED] == 'true';
 
 		# error message
 		if( !user_is_name_valid( $users_info[COLUMN_USER_NAME] ) ) {
@@ -149,15 +145,30 @@ foreach( $t_file_content as &$t_file_line ) {
 		$firstline_skip = false;
 		continue;
 	}
-	echo '<tr>';
+
 	// Still more lines (add "...")
 	if( --$t_display_max < 0 ) {
 		echo str_repeat( '<td>&hellip;</td>', $f_column_count );
 		echo '</tr>';
 		break;
 	} else {
+		$t_skip_row = false;
+		$t_first_column = true;
+
 		// Write values
 		foreach( read_csv_row( $t_file_line, $f_separator ) as $t_key => $t_element ) {
+			if( $t_key == COLUMN_USER_NAME && is_blank( $t_element ) ) {
+				$t_skip_row = true;
+			}
+
+			if( $t_skip_row ) {
+				continue;
+			}
+
+			if( $t_first_column ) {
+				$t_first_column = false;
+				echo '<tr>';
+			}
 
 			if( $t_key == COLUMN_PASSWORD ) {
 				if( is_blank( $t_element ) ) {
@@ -172,7 +183,7 @@ foreach( $t_file_content as &$t_file_line ) {
 				if( is_blank( $t_element ) ) {
 					echo '<td><font color="green">false</font></td>';
 				} else {
-					echo '<td>' . prepare_output( $t_element ) . '</td>';
+					echo '<td>' . prepare_bool_output( $t_element, false ) . '</td>';
 				}
 				continue;
 			}
@@ -181,13 +192,17 @@ foreach( $t_file_content as &$t_file_line ) {
 				if( is_blank( $t_element ) ) {
 					echo '<td><font color="green">true</font></td>';
 				} else {
-					echo '<td>' . prepare_output( $t_element ) . '</td>';
+					echo '<td>' . prepare_bool_output( $t_element, true ) . '</td>';
 				}
 				continue;
 			}
 
 			echo '<td>' . prepare_output( $t_element ) . '</td>';
 		}
+	}
+
+	if( $t_skip_row ) {
+		continue;
 	}
 
 	if( $i >= 0 ) {

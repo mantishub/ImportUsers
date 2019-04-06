@@ -120,8 +120,17 @@ foreach ( $t_file_content as &$t_file_line ) {
 		echo '</tr>';
 		break;
 	} else {
+		$t_skip_row = false;
 		// Write values
 		foreach ( read_csv_row ( $t_file_line, $t_separator ) as $t_key => $t_element ) {
+			if( $t_key == COLUMN_USER_NAME && is_blank( $t_element ) ) {
+				$t_skip_row = true;
+			}
+
+			if( $t_skip_row ) {
+				continue;
+			}
+
 			if( $t_key == COLUMN_PASSWORD ) {
 				if( is_blank( $t_element ) ) {
 					echo '<td><font color="green">' . plugin_lang_get( 'auto_generate' ) . '</font></td>';
@@ -136,7 +145,7 @@ foreach ( $t_file_content as &$t_file_line ) {
 				if( is_blank( $t_element ) ) {
 					echo '<td><font color="green">false</font></td>';
 				} else {
-					echo '<td>' . prepare_output( $t_element ) . '</td>';
+					echo '<td>' . prepare_bool_output( $t_element, false ) . '</td>';
 				}
 
 				continue;
@@ -146,7 +155,7 @@ foreach ( $t_file_content as &$t_file_line ) {
 				if( is_blank( $t_element ) ) {
 					echo '<td><font color="green">true</font></td>';
 				} else {
-					echo '<td>' . prepare_output( $t_element ) . '</td>';
+					echo '<td>' . prepare_bool_output( $t_element, true ) . '</td>';
 				}
 
 				continue;
