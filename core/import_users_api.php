@@ -54,7 +54,7 @@ function prepare_bool_output( $p_string, $p_default ) {
 		$t_value = $p_default ? 'true' : 'false';
 	}
 
-	if( $t_value == 'on' || $t_value == '1' || $t_value == 't' || $t_value == 'true' || $t_value = 'yes' || $t_value == 'y' ) {
+	if( $t_value == 'on' || $t_value == '1' || $t_value == 't' || $t_value == 'true' || $t_value == 'yes' || $t_value == 'y' ) {
 		$t_value = 'true';
 	} else {
 		$t_value = 'false';
