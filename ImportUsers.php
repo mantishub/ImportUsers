@@ -13,7 +13,7 @@ class ImportUsersPlugin extends MantisPlugin
 		$this->version = '1.0';
 		$this->requires = array( 'MantisCore' => '2.0.0' );
 		$this->author = 'MantisHub';
-		$this->contact = 'http://www.mantishub.com';
-		$this->url = 'http://www.mantishub.com';
+		$this->contact = 'support@mantishub.com';
+		$this->url = 'https://www.mantishub.com';
 	}
 }
