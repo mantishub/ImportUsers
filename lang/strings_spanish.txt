@@ -1,0 +1,5 @@
+<?php
+# Filename: strings_spanish.txt
+# Project: ImportUsers
+# Language: es
+
