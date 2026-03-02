@@ -21,6 +21,7 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 	<div class="space-10"></div>
 	<div class="form-container">
 		<form method="post" enctype="multipart/form-data" action="<?php echo $t_import_page ?>">
+			<?php echo form_security_field( 'plugin_import_users' ) ?>
 
 		<div class="widget-box widget-color-blue2">
 			<div class="widget-header widget-header-small">

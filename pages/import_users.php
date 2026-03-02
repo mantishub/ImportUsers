@@ -13,6 +13,8 @@ require_api( 'bug_api.php' );
 plugin_require_api( 'core/import_users_api.php' );
 access_ensure_project_level( ADMINISTRATOR );
 
+form_security_validate( 'plugin_import_users_col_set' );
+
 layout_page_header( plugin_lang_get( 'import_users' ) );
 layout_page_begin();
 
@@ -20,7 +22,21 @@ $f_import_file = gpc_get_string( 'import_file' );
 $f_separator = gpc_get_string( 'edt_cell_separator' );
 $f_column_count = gpc_get_string( 'import_column_count' ) + 1;
 $f_invite_emails = gpc_get_bool( 'invite_emails' );
-$t_file_content = read_csv_file( $f_import_file );
+
+# Validate the import file path is within the PHP temp directory to prevent path traversal.
+# Use upload_tmp_dir when set (it can differ from sys_get_temp_dir on some configurations).
+# stripos gives case-insensitive comparison needed on Windows; DIRECTORY_SEPARATOR prevents
+# a path like /tmpEvil from matching a prefix of /tmp.
+$t_upload_tmp_dir = ini_get( 'upload_tmp_dir' );
+$t_temp_dir = realpath( is_blank( $t_upload_tmp_dir ) ? sys_get_temp_dir() : $t_upload_tmp_dir );
+$t_real_import_file = realpath( $f_import_file );
+if( $t_temp_dir === false
+	|| $t_real_import_file === false
+	|| stripos( $t_real_import_file, $t_temp_dir . DIRECTORY_SEPARATOR ) !== 0 ) {
+	trigger_error( ERROR_ACCESS_DENIED, ERROR );
+}
+
+$t_file_content = read_csv_file( $t_real_import_file );
 
 $t_columns_lables = array();
 $users_info = array();
@@ -31,7 +47,6 @@ $t_first_run = true;
 # Import status
 $status = array();
 
-error_reporting( 0 );
 $error_message = array();
 
 foreach( $t_file_content as &$t_file_line ) {

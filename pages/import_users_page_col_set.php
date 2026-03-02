@@ -9,6 +9,8 @@ plugin_require_api( 'core/import_users_api.php' );
 
 access_ensure_global_level( ADMINISTRATOR );
 
+form_security_validate( 'plugin_import_users' );
+
 layout_page_header( plugin_lang_get( 'import_users' ) );
 layout_page_begin();
 
@@ -82,7 +84,7 @@ move_uploaded_file( $f_import_file ['tmp_name'], $t_file_name );
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<?php echo $f_import_file['name']?>	
+				<?php echo string_html_specialchars( $f_import_file['name'] )?>
 		    </h4>
 		</div>
 
@@ -174,8 +176,9 @@ foreach ( $t_file_content as &$t_file_line ) {
 
 			<div class="widget-toolbox padding-8 clearfix">
 			<form method="post" action="<?php echo $t_import_it ?>">
-				<input type="hidden" name="edt_cell_separator" value="<?php echo $t_separator ?>" /> 
-				<input type="hidden" name="import_file" value="<?php echo $t_file_name ?>" /> 
+				<?php echo form_security_field( 'plugin_import_users_col_set' ) ?>
+				<input type="hidden" name="edt_cell_separator" value="<?php echo string_html_specialchars( $t_separator ) ?>" /> 
+				<input type="hidden" name="import_file" value="<?php echo string_html_specialchars( $t_file_name ) ?>" /> 
 				<input type="hidden" name="import_column_count" value="<?php echo $t_column_count ?>" /> 
 				<input type="hidden" name="invite_emails" value="<?php echo $f_invite_emails ?>" /> 
 				<input type="submit" id="importForm" class="btn btn-primary btn-white btn-sm btn-round" value="<?php echo plugin_lang_get( 'file_button' ) ?>" />
