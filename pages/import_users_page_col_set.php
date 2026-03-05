@@ -10,7 +10,6 @@ plugin_require_api( 'core/import_users_api.php' );
 access_ensure_global_level( ADMINISTRATOR );
 
 form_security_validate( 'plugin_import_users' );
-form_security_purge( 'plugin_import_users' );
 
 layout_page_header( plugin_lang_get( 'import_users' ) );
 layout_page_begin();
@@ -74,6 +73,8 @@ if( is_writable( $f_import_file ['tmp_name'] ) ) {
 // Move file
 $t_file_name = tempnam( dirname ( $f_import_file ['tmp_name'] ), 'tmp' );
 move_uploaded_file( $f_import_file ['tmp_name'], $t_file_name );
+
+form_security_purge( 'plugin_import_users' );
 ?>
 
 <!-- File extraction -->

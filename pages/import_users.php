@@ -14,7 +14,6 @@ plugin_require_api( 'core/import_users_api.php' );
 access_ensure_project_level( ADMINISTRATOR );
 
 form_security_validate( 'plugin_import_users_col_set' );
-form_security_purge( 'plugin_import_users_col_set' );
 
 layout_page_header( plugin_lang_get( 'import_users' ) );
 layout_page_begin();
@@ -117,6 +116,8 @@ foreach( $t_file_content as &$t_file_line ) {
 		}
 	}
 }
+
+form_security_purge( 'plugin_import_users_col_set' );
 ?>
 
 <div class="col-md-12 col-xs-12">
