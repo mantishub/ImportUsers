@@ -35,7 +35,8 @@ function read_csv_file( $p_filename ) {
 
 # --------------------
 function read_csv_row( $p_file_row, $p_separator ) {
-	$t_regexp = '/\G(?:\A|\\' . $p_separator . ')([^"\\' . $p_separator . ']+|(?:"[^"]*")*)/sm';
+	$t_q_sep = preg_quote( $p_separator, '/' );
+	$t_regexp = '/\G(?:\A|' . $t_q_sep . ')([^"' . $t_q_sep . ']+|(?:"[^"]*")*)/sm';
 	preg_match_all( $t_regexp, $p_file_row, $t_row_element );
 	return array_map( 'csv_string_unescape', $t_row_element[1] );
 }
