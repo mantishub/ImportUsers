@@ -43,7 +43,7 @@ function read_csv_row( $p_file_row, $p_separator ) {
 
 # --------------------
 function prepare_output( $p_string ) {
-	return string_html_specialchars( utf8_encode( $p_string ) );
+	return string_html_specialchars( mb_convert_encoding( $p_string, 'UTF-8', 'ISO-8859-1' ) );
 }
 
 # --------------------
