@@ -1,0 +1,149 @@
+name: PolinRider malware guard
+
+on:
+  pull_request:
+    branches:
+      - '**'
+  push:
+    branches:
+      - '**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    name: Static malware indicator scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Scan for known PolinRider indicators
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          failed=0
+
+          join_parts() {
+            local IFS=""
+            printf "%s" "$*"
+          }
+
+          echo "Checking forbidden malware-related paths..."
+
+          font_payload_path="$(join_parts "public/fonts/fa-solid-" "400.woff2")"
+          branch_manifest="$(join_parts "branch_" "structure.json")"
+          auto_push_bat="$(join_parts "temp_auto_" "push.bat")"
+          interactive_push_bat="$(join_parts "temp_interactive_" "push.bat")"
+          auto_push_sh="$(join_parts "temp_auto_" "push.sh")"
+          interactive_push_sh="$(join_parts "temp_interactive_" "push.sh")"
+          branch_script="$(join_parts "branch_" "structure.sh")"
+
+          forbidden_paths=(
+            ".vscode/tasks.json"
+            ".vscode/settings.json"
+            "$font_payload_path"
+            "$branch_manifest"
+            "$auto_push_bat"
+            "$interactive_push_bat"
+            "$auto_push_sh"
+            "$interactive_push_sh"
+            "auto_push.sh"
+            "interactive_push.sh"
+            "$branch_script"
+            "config.bat"
+            "config.sh"
+          )
+
+          for path in "${forbidden_paths[@]}"; do
+            if git ls-files --error-unmatch "$path" >/dev/null 2>&1; then
+              echo "::error file=$path::Forbidden PolinRider-related path is tracked."
+              failed=1
+            fi
+          done
+
+          echo "Scanning tracked text files for high-confidence indicators..."
+
+          global_single="$(join_parts "global" "\\['!'\\]")"
+          global_double="$(join_parts "global" "\\[\"!\"\\]")"
+          marker="$(join_parts "wuqktamceigynz" "bosdctpusocrjhrflovnxrt")"
+          node_font="$(join_parts "node ./public/" "fonts")"
+          task_auto="$(join_parts "task.allow" "AutomaticTasks")"
+          folder_open="$(join_parts "\"folder" "Open\"")"
+          run_on="$(join_parts "\"run" "On\"[[:space:]]*:")"
+          font_payload_name="$(join_parts "fa-solid-" "400\\.woff2")"
+          auto_push_bat_pattern="$(join_parts "temp_auto_" "push\\.bat")"
+          interactive_push_bat_pattern="$(join_parts "temp_interactive_" "push\\.bat")"
+          auto_push_sh_pattern="$(join_parts "temp_auto_" "push\\.sh")"
+          interactive_push_sh_pattern="$(join_parts "temp_interactive_" "push\\.sh")"
+          branch_manifest_pattern="$(join_parts "branch_" "structure\\.json")"
+
+          high_confidence_pattern="${global_single}|${global_double}|${marker}|${node_font}|${task_auto}|${run_on}|${folder_open}|${font_payload_name}|${auto_push_bat_pattern}|${interactive_push_bat_pattern}|${auto_push_sh_pattern}|${interactive_push_sh_pattern}|${branch_manifest_pattern}"
+
+          if git grep -n -I -E "$high_confidence_pattern" -- .; then
+            echo "::error::Known PolinRider malware indicator found in tracked files."
+            failed=1
+          fi
+
+          echo "Checking font asset files for embedded JS/shell payloads..."
+
+          asset_polinrider_pattern="$high_confidence_pattern"
+          font_payload_pattern="${asset_polinrider_pattern}|require\\(|module|Function\\(|eval\\(|child_process|exec\\(|spawn\\(|powershell|curl|wget"
+
+          while IFS= read -r -d '' file; do
+            if grep -aE "$font_payload_pattern" "$file" >/dev/null 2>&1; then
+              echo "::error file=$file::Suspicious JS/shell indicator found inside font asset."
+              failed=1
+            fi
+          done < <(git ls-files -z '*.woff' '*.woff2' '*.ttf')
+
+          echo "Checking image asset files for high-confidence PolinRider markers..."
+
+          while IFS= read -r -d '' file; do
+            if grep -aE "$asset_polinrider_pattern" "$file" >/dev/null 2>&1; then
+              echo "::error file=$file::Known PolinRider indicator found inside image asset."
+              failed=1
+            fi
+          done < <(git ls-files -z '*.png' '*.jpg' '*.jpeg' '*.ico' '*.icns')
+
+          echo "Checking SVG assets for high-confidence PolinRider markers..."
+
+          while IFS= read -r -d '' file; do
+            if grep -aE "$asset_polinrider_pattern" "$file" >/dev/null 2>&1; then
+              echo "::error file=$file::Known PolinRider indicator found inside SVG asset."
+              failed=1
+            fi
+          done < <(git ls-files -z '*.svg')
+
+          echo "Checking shell scripts for Git propagation behavior..."
+
+          shell_propagation_pattern="$(join_parts "git push.*(--force|-f|--mirror)|git commit --amend|git for-each-ref|git rev-list|git branch --all|git tag --list|temp_auto_" "push|temp_interactive_" "push|branch_" "structure")"
+
+          if git ls-files '*.sh' | grep -q .; then
+            if git grep -n -I -E "$shell_propagation_pattern" -- '*.sh'; then
+              echo "::error::Suspicious Git propagation behavior found in shell script."
+              failed=1
+            fi
+          fi
+
+          echo "Checking batch scripts for Git propagation behavior..."
+
+          windows_propagation_pattern="$(join_parts "git push.*(--force|-f|--mirror)|git commit --amend|git for-each-ref|git rev-list|git branch --all|git tag --list|powershell|curl|wget|temp_auto_" "push|temp_interactive_" "push|branch_" "structure")"
+
+          if git ls-files '*.bat' '*.cmd' '*.ps1' | grep -q .; then
+            if git grep -n -I -E "$windows_propagation_pattern" -- '*.bat' '*.cmd' '*.ps1'; then
+              echo "::error::Suspicious Git propagation behavior found in Windows script."
+              failed=1
+            fi
+          fi
+
+          if [ "$failed" -ne 0 ]; then
+            echo "PolinRider guard failed."
+            exit 1
+          fi
+
+          echo "PolinRider guard passed."
